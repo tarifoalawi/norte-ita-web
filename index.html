@@ -13,7 +13,6 @@
             --dorado: #b5975a;
             --dorado-claro: #d4b97a;
             --crema: #f7f3ed;
-            --gris-claro: #f0f0f0;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', sans-serif; color: #2c2c2c; }
@@ -33,28 +32,99 @@
         .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--dorado-claro); }
 
-        /* HERO */
+        /* HERO CON CARRUSEL */
         .hero {
-            background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 100%);
-            min-height: 560px;
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .carrusel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .slide.activo { opacity: 1; }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(30,60,25,0.82) 0%, rgba(30,60,25,0.4) 60%, rgba(30,60,25,0.15) 100%);
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 4rem 2rem;
         }
-        .hero-content { max-width: 700px; }
-        .hero-logo { width: 280px; max-width: 75%; margin-bottom: 2rem; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3)); }
-        .hero p { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 2rem; }
+
+        .slide-contenido {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            color: white;
+        }
+
+        .slide-contenido img.logo-slide {
+            height: 80px;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.4));
+        }
+
+        .slide-tag {
+            display: inline-block;
+            background: var(--dorado);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .slide-contenido h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .slide-contenido p {
+            font-size: 1.05rem;
+            opacity: 0.88;
+            margin-bottom: 1.8rem;
+            max-width: 420px;
+            line-height: 1.7;
+        }
+
         .btn {
             display: inline-block;
-            padding: 0.85rem 2.2rem;
+            padding: 0.8rem 2rem;
             background: var(--dorado);
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 0.5px;
             transition: all 0.3s;
             border: none;
@@ -62,200 +132,131 @@
         }
         .btn:hover { background: var(--dorado-claro); transform: translateY(-2px); }
 
+        /* Controles carrusel */
+        .carrusel-prev,
+        .carrusel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .carrusel-prev:hover, .carrusel-next:hover { background: rgba(255,255,255,0.3); }
+        .carrusel-prev { right: 70px; }
+        .carrusel-next { right: 20px; }
+
+        .carrusel-dots {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.activo { background: var(--dorado); transform: scale(1.3); }
+
         /* SECCIONES */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         section { padding: 5rem 0; }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--verde-oscuro);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        .section-title .linea {
-            width: 60px;
-            height: 3px;
-            background: var(--dorado);
-            margin: 0 auto;
-            border-radius: 2px;
-        }
-        .section-title p {
-            color: #666;
-            margin-top: 0.8rem;
-            font-size: 1rem;
-        }
+        .section-title { text-align: center; margin-bottom: 3.5rem; }
+        .section-title h2 { font-size: 2rem; color: var(--verde-oscuro); margin-bottom: 0.5rem; font-weight: 600; }
+        .section-title .linea { width: 60px; height: 3px; background: var(--dorado); margin: 0 auto; border-radius: 2px; }
+        .section-title p { color: #666; margin-top: 0.8rem; font-size: 1rem; }
 
         /* NOSOTROS */
         #nosotros { background: var(--crema); }
-        .nosotros-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+        .nosotros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .nosotros-text p { color: #555; margin-bottom: 1.1rem; font-size: 1rem; line-height: 1.8; }
         .nosotros-img img { width: 100%; max-width: 380px; display: block; margin: 0 auto; }
         .nosotros-badges { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            padding: 0.4rem 1rem;
-            font-size: 0.85rem;
-            color: var(--verde-oscuro);
-            font-weight: 500;
-        }
+        .badge { display: flex; align-items: center; gap: 0.4rem; background: white; border: 1px solid #ddd; border-radius: 20px; padding: 0.4rem 1rem; font-size: 0.85rem; color: var(--verde-oscuro); font-weight: 500; }
         .badge i { color: var(--dorado); }
 
         /* PRODUCTOS */
         #productos { background: white; }
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-        .producto-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
-            transition: all 0.3s;
-            border: 1px solid #eee;
-        }
-        .producto-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(58,107,53,0.12);
-            border-color: var(--dorado);
-        }
-        .producto-img {
-            background: var(--crema);
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 1.5rem;
-        }
-        .producto-img img {
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain;
-            transition: transform 0.3s;
-        }
+        .productos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .producto-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.07); transition: all 0.3s; border: 1px solid #eee; }
+        .producto-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(58,107,53,0.12); border-color: var(--dorado); }
+        .producto-img { background: var(--crema); height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 1.5rem; }
+        .producto-img img { max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 0.3s; }
         .producto-card:hover .producto-img img { transform: scale(1.05); }
         .producto-info { padding: 1.2rem 1.4rem 1.5rem; }
-        .producto-categoria {
-            font-size: 0.75rem;
-            color: var(--dorado);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
-        }
+        .producto-categoria { font-size: 0.75rem; color: var(--dorado); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
         .producto-info h3 { color: var(--verde-oscuro); font-size: 1.05rem; margin-bottom: 0.5rem; }
         .producto-info p { color: #777; font-size: 0.88rem; line-height: 1.6; }
 
-        /* GALERÍA / CATEGORIAS */
-        #categorias { background: var(--verde-oscuro); padding: 4rem 0; }
-        #categorias .section-title h2 { color: white; }
-        #categorias .section-title p { color: rgba(255,255,255,0.7); }
-        .categorias-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .categoria-card {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .categoria-card:hover { background: rgba(255,255,255,0.13); border-color: var(--dorado); }
-        .categoria-card i { font-size: 2.5rem; color: var(--dorado-claro); margin-bottom: 1rem; display: block; }
-        .categoria-card h3 { color: white; font-size: 1rem; margin-bottom: 0.4rem; }
-        .categoria-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+        /* LINEAS */
+        #lineas { background: var(--verde-oscuro); padding: 4rem 0; }
+        #lineas .section-title h2 { color: white; }
+        #lineas .section-title p { color: rgba(255,255,255,0.7); }
+        .lineas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .linea-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .linea-card:hover { background: rgba(255,255,255,0.13); border-color: var(--dorado); }
+        .linea-card i { font-size: 2.5rem; color: var(--dorado-claro); margin-bottom: 1rem; display: block; }
+        .linea-card h3 { color: white; font-size: 1rem; margin-bottom: 0.4rem; }
+        .linea-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
 
         /* CONTACTO */
         #contacto { background: var(--crema); }
         .contacto-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
         .contacto-info h3 { color: var(--verde-oscuro); font-size: 1.3rem; margin-bottom: 1.5rem; }
         .contacto-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-        .contacto-icon {
-            width: 42px;
-            height: 42px;
-            background: var(--verde-oscuro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
+        .contacto-icon { width: 42px; height: 42px; background: var(--verde-oscuro); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .contacto-icon i { color: white; font-size: 0.9rem; }
         .contacto-item h4 { color: var(--verde-oscuro); font-size: 0.9rem; margin-bottom: 0.2rem; }
         .contacto-item p { color: #666; font-size: 0.9rem; }
-
         .form-card { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
         .form-group { margin-bottom: 1.2rem; }
         .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; font-weight: 600; color: #444; }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            color: #333;
-            transition: border 0.3s;
-        }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.9rem; color: #333; transition: border 0.3s; }
         .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--verde); }
         .form-group textarea { resize: vertical; min-height: 110px; }
         .btn-full { width: 100%; text-align: center; border-radius: 8px; padding: 0.9rem; }
 
         /* FOOTER */
-        footer {
-            background: var(--verde-oscuro);
-            border-top: 3px solid var(--dorado);
-            color: white;
-            padding: 2.5rem 0;
-        }
+        footer { background: var(--verde-oscuro); border-top: 3px solid var(--dorado); color: white; padding: 2.5rem 0; }
         .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
         .footer-logo img { height: 55px; }
         .footer-text p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
         .social { display: flex; gap: 0.8rem; }
-        .social a {
-            width: 38px; height: 38px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: white;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-            text-decoration: none;
-        }
+        .social a { width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; transition: background 0.3s; text-decoration: none; }
         .social a:hover { background: var(--dorado); }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .productos-grid { grid-template-columns: repeat(2, 1fr); }
-            .categorias-grid { grid-template-columns: repeat(2, 1fr); }
+            .lineas-grid { grid-template-columns: repeat(2, 1fr); }
             .nosotros-grid { grid-template-columns: 1fr; }
             .contacto-grid { grid-template-columns: 1fr; }
+            .slide-contenido h2 { font-size: 2rem; }
         }
         @media (max-width: 600px) {
             .nav-links { display: none; }
             .productos-grid { grid-template-columns: 1fr; }
-            .categorias-grid { grid-template-columns: 1fr; }
-            .hero-logo { width: 200px; }
+            .lineas-grid { grid-template-columns: 1fr; }
+            .hero { height: 480px; }
+            .slide-contenido h2 { font-size: 1.6rem; }
             .footer-content { flex-direction: column; text-align: center; }
+            .carrusel-prev { right: 60px; }
         }
     </style>
 </head>
@@ -273,14 +274,73 @@
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-content">
-            <img src="logo_nortenita.png" alt="Norteñita" class="hero-logo">
-            <p>Sabor auténtico del norte argentino, elaborado con tradición y calidad en cada producto.</p>
-            <a href="#productos" class="btn">Ver productos</a>
+    <!-- HERO CON CARRUSEL -->
+    <div class="hero">
+        <div class="carrusel" id="carrusel">
+
+            <!-- SLIDE 1 - Batata -->
+            <div class="slide activo">
+                <img src="https://images.unsplash.com/photo-1596797882870-8c33dcedc7f6?w=1600&q=80" alt="Batata fresca">
+                <div class="slide-overlay">
+                    <div class="slide-contenido">
+                        <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
+                        <span class="slide-tag">Línea Dulces</span>
+                        <h2>Dulce de Batata</h2>
+                        <p>Elaborado con batatas frescas seleccionadas del norte argentino, con el sabor de siempre.</p>
+                        <a href="#productos" class="btn">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2 - Membrillo -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1600&q=80" alt="Membrillo fresco">
+                <div class="slide-overlay">
+                    <div class="slide-contenido">
+                        <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
+                        <span class="slide-tag">Línea Dulces</span>
+                        <h2>Dulce de Membrillo</h2>
+                        <p>Membrillos maduros y naturales, convertidos en el dulce clásico de la mesa argentina.</p>
+                        <a href="#productos" class="btn">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3 - Tomate -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=1600&q=80" alt="Tomates frescos">
+                <div class="slide-overlay">
+                    <div class="slide-contenido">
+                        <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
+                        <span class="slide-tag">Línea Tomates</span>
+                        <h2>Tomates Triturados</h2>
+                        <p>Tomates rojos y jugosos, procesados naturalmente para darle el toque casero a tus recetas.</p>
+                        <a href="#productos" class="btn">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4 - Azúcar / Caña -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=1600&q=80" alt="Caña de azúcar">
+                <div class="slide-overlay">
+                    <div class="slide-contenido">
+                        <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
+                        <span class="slide-tag">Azúcar</span>
+                        <h2>Azúcar de Caña</h2>
+                        <p>Azúcar común tipo A elaborada con caña tucumana. Calidad para uso doméstico e industrial.</p>
+                        <a href="#productos" class="btn">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section>
+
+        <!-- Controles -->
+        <button class="carrusel-prev" onclick="moverSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="carrusel-next" onclick="moverSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="carrusel-dots" id="dots"></div>
+    </div>
 
     <!-- NOSOTROS -->
     <section id="nosotros">
@@ -316,19 +376,15 @@
             </div>
             <div class="productos-grid">
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="dulce_de_vatata_a_la_vainilla.jpeg" alt="Dulce de Batata a la Vainilla">
-                    </div>
+                    <div class="producto-img"><img src="dulce_de_vatata_a_la_vainilla.jpeg" alt="Dulce de Batata a la Vainilla"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Batata a la Vainilla</h3>
-                        <p>Elaborado con batata fresca y vainilla natural. Disponible en presentación de 5 kg.</p>
+                        <p>Elaborado con batata fresca y vainilla natural. Presentación de 5 kg.</p>
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="dulce_de_batata_con_chocolate.jpeg" alt="Dulce de Batata con Chocolate">
-                    </div>
+                    <div class="producto-img"><img src="dulce_de_batata_con_chocolate.jpeg" alt="Dulce de Batata con Chocolate"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Batata con Chocolate</h3>
@@ -336,9 +392,7 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="dulce_de_membrillo.jpeg" alt="Dulce de Membrillo">
-                    </div>
+                    <div class="producto-img"><img src="dulce_de_membrillo.jpeg" alt="Dulce de Membrillo"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Membrillo</h3>
@@ -346,59 +400,53 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="lata_de_tomate.jpeg" alt="Tomates Triturados Lata">
-                    </div>
+                    <div class="producto-img"><img src="lata_de_tomate.jpeg" alt="Tomates Triturados Lata"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Tomates</div>
                         <h3>Tomates Triturados — Lata</h3>
-                        <p>Tomates frescos procesados naturalmente. Presentación lata de 8 kg.</p>
+                        <p>Tomates frescos procesados naturalmente. Lata de 8 kg.</p>
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="botella_de_tomate.jpeg" alt="Tomates Triturados Botella">
-                    </div>
+                    <div class="producto-img"><img src="botella_de_tomate.jpeg" alt="Tomates Triturados Botella"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Tomates</div>
                         <h3>Tomates Triturados — Botella</h3>
-                        <p>Tomates triturados sin aditivos artificiales. Presentación botella de 980 gr.</p>
+                        <p>Tomates triturados sin aditivos artificiales. Botella de 980 gr.</p>
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="azucar.jpeg" alt="Azúcar">
-                    </div>
+                    <div class="producto-img"><img src="azucar.jpeg" alt="Azúcar"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Azúcar</div>
                         <h3>Azúcar Común Tipo A</h3>
-                        <p>Azúcar de caña de alta calidad. Ideal para uso doméstico e industrial. 1 kg.</p>
+                        <p>Azúcar de caña de alta calidad para uso doméstico e industrial. 1 kg.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CATEGORÍAS -->
-    <section id="categorias">
+    <!-- LINEAS -->
+    <section id="lineas">
         <div class="container">
             <div class="section-title">
                 <h2>Nuestras líneas</h2>
                 <div class="linea"></div>
                 <p>Productos para cada necesidad</p>
             </div>
-            <div class="categorias-grid">
-                <div class="categoria-card">
+            <div class="lineas-grid">
+                <div class="linea-card">
                     <i class="fas fa-cookie-bite"></i>
                     <h3>Línea de Dulces</h3>
                     <p>Dulce de batata y membrillo elaborados con fruta fresca</p>
                 </div>
-                <div class="categoria-card">
+                <div class="linea-card">
                     <i class="fas fa-seedling"></i>
                     <h3>Línea de Tomates</h3>
                     <p>Tomates triturados naturales en diferentes presentaciones</p>
                 </div>
-                <div class="categoria-card">
+                <div class="linea-card">
                     <i class="fas fa-sun"></i>
                     <h3>Azúcar</h3>
                     <p>Azúcar de caña tipo A para uso doméstico e industrial</p>
@@ -420,24 +468,15 @@
                     <h3>¿Querés hacer un pedido o tenés alguna consulta?</h3>
                     <div class="contacto-item">
                         <div class="contacto-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Ubicación</h4>
-                            <p>San Miguel de Tucumán, Argentina</p>
-                        </div>
+                        <div><h4>Dirección</h4><p>San Miguel de Tucumán, Argentina</p></div>
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <h4>Teléfono</h4>
-                            <p>+54 (381) 637-4363</p>
-                        </div>
+                        <div><h4>Teléfono</h4><p>+54 (381) XXX-XXXX</p></div>
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@norteñita.com.ar</p>
-                        </div>
+                        <div><h4>Email</h4><p>info@norteñita.com</p></div>
                     </div>
                 </div>
                 <div class="form-card">
@@ -476,6 +515,42 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dots');
+        let actual = 0;
+        let intervalo;
+
+        // Crear dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('activo');
+            dot.addEventListener('click', () => irA(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        function irA(n) {
+            slides[actual].classList.remove('activo');
+            document.querySelectorAll('.dot')[actual].classList.remove('activo');
+            actual = (n + slides.length) % slides.length;
+            slides[actual].classList.add('activo');
+            document.querySelectorAll('.dot')[actual].classList.add('activo');
+        }
+
+        function moverSlide(dir) {
+            irA(actual + dir);
+            reiniciarIntervalo();
+        }
+
+        function reiniciarIntervalo() {
+            clearInterval(intervalo);
+            intervalo = setInterval(() => irA(actual + 1), 5000);
+        }
+
+        intervalo = setInterval(() => irA(actual + 1), 5000);
+    </script>
 
 </body>
 </html>

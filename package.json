@@ -1,0 +1,23 @@
+{
+  "name": "nortenita-web",
+  "version": "1.0.0",
+  "description": "Página web profesional para Norteñita - Productos Alimenticios Premium",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "alimentos",
+    "dulce de batata",
+    "dulce de membrillo",
+    "argentina",
+    "tucuman"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/nortenita-web.git"
+  }
+}

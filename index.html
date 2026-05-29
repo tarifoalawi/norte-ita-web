@@ -33,145 +33,65 @@
         .nav-links a:hover { color: var(--dorado-claro); }
 
         /* HERO CON CARRUSEL */
-        .hero {
-            position: relative;
-            height: 600px;
-            overflow: hidden;
-        }
-
-        .carrusel {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out;
-        }
-
+        .hero { position: relative; height: 600px; overflow: hidden; }
+        .carrusel { position: relative; width: 100%; height: 100%; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; }
         .slide.activo { opacity: 1; }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+        .slide img.slide-bg { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
         .slide-overlay {
             position: absolute;
             top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(30,60,25,0.82) 0%, rgba(30,60,25,0.4) 60%, rgba(30,60,25,0.15) 100%);
+            width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(25,55,20,0.85) 0%, rgba(25,55,20,0.5) 55%, rgba(25,55,20,0.1) 100%);
             display: flex;
             align-items: center;
         }
-
         .slide-contenido {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 3rem;
             color: white;
+            width: 100%;
         }
-
-        .slide-contenido img.logo-slide {
-            height: 80px;
-            margin-bottom: 1.5rem;
+        .slide-contenido .logo-slide {
+            width: 220px;
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 1.2rem;
             display: block;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
         }
-
         .slide-tag {
             display: inline-block;
             background: var(--dorado);
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             padding: 0.3rem 1rem;
             border-radius: 20px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.9rem;
         }
+        .slide-contenido h2 { font-size: 2.6rem; font-weight: 700; line-height: 1.15; margin-bottom: 0.7rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .slide-contenido p { font-size: 1rem; opacity: 0.88; margin-bottom: 1.6rem; max-width: 400px; line-height: 1.7; }
 
-        .slide-contenido h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 0.8rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .slide-contenido p {
-            font-size: 1.05rem;
-            opacity: 0.88;
-            margin-bottom: 1.8rem;
-            max-width: 420px;
-            line-height: 1.7;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: var(--dorado);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
+        .btn { display: inline-block; padding: 0.8rem 2rem; background: var(--dorado); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; border: none; cursor: pointer; }
         .btn:hover { background: var(--dorado-claro); transform: translateY(-2px); }
 
-        /* Controles carrusel */
-        .carrusel-prev,
-        .carrusel-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: background 0.3s;
-            font-size: 1rem;
+        .carrusel-prev, .carrusel-next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: white; width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10; transition: background 0.3s; font-size: 1rem;
         }
         .carrusel-prev:hover, .carrusel-next:hover { background: rgba(255,255,255,0.3); }
         .carrusel-prev { right: 70px; }
         .carrusel-next { right: 20px; }
-
-        .carrusel-dots {
-            position: absolute;
-            bottom: 20px;
-            right: 25px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+        .carrusel-dots { position: absolute; bottom: 20px; right: 25px; display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; }
         .dot.activo { background: var(--dorado); transform: scale(1.3); }
 
         /* SECCIONES */
@@ -241,7 +161,6 @@
         .social a { width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; transition: background 0.3s; text-decoration: none; }
         .social a:hover { background: var(--dorado); }
 
-        /* RESPONSIVE */
         @media (max-width: 900px) {
             .productos-grid { grid-template-columns: repeat(2, 1fr); }
             .lineas-grid { grid-template-columns: repeat(2, 1fr); }
@@ -255,6 +174,7 @@
             .lineas-grid { grid-template-columns: 1fr; }
             .hero { height: 480px; }
             .slide-contenido h2 { font-size: 1.6rem; }
+            .slide-contenido .logo-slide { width: 160px; }
             .footer-content { flex-direction: column; text-align: center; }
             .carrusel-prev { right: 60px; }
         }
@@ -262,7 +182,6 @@
 </head>
 <body>
 
-    <!-- NAV -->
     <nav>
         <div class="nav-container">
             <div class="logo"><img src="logo_nortenita.png" alt="Norteñita"></div>
@@ -274,19 +193,19 @@
         </div>
     </nav>
 
-    <!-- HERO CON CARRUSEL -->
+    <!-- HERO CARRUSEL -->
     <div class="hero">
         <div class="carrusel" id="carrusel">
 
             <!-- SLIDE 1 - Batata -->
             <div class="slide activo">
-                <img src="https://images.unsplash.com/photo-1596797882870-8c33dcedc7f6?w=1600&q=80" alt="Batata fresca">
+                <img class="slide-bg" src="https://images.unsplash.com/photo-1591073113125-e46713c829ed?w=1600&q=80" alt="Batata fresca">
                 <div class="slide-overlay">
                     <div class="slide-contenido">
                         <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
                         <span class="slide-tag">Línea Dulces</span>
                         <h2>Dulce de Batata</h2>
-                        <p>Elaborado con batatas frescas seleccionadas del norte argentino, con el sabor de siempre.</p>
+                        <p>Elaborado con batatas frescas seleccionadas, con el sabor de siempre.</p>
                         <a href="#productos" class="btn">Ver productos</a>
                     </div>
                 </div>
@@ -294,7 +213,7 @@
 
             <!-- SLIDE 2 - Membrillo -->
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1600&q=80" alt="Membrillo fresco">
+                <img class="slide-bg" src="https://images.unsplash.com/photo-1629096904913-66a9d8a9e94c?w=1600&q=80" alt="Membrillo fresco">
                 <div class="slide-overlay">
                     <div class="slide-contenido">
                         <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
@@ -308,7 +227,7 @@
 
             <!-- SLIDE 3 - Tomate -->
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=1600&q=80" alt="Tomates frescos">
+                <img class="slide-bg" src="https://images.unsplash.com/photo-1546094096-0df4bcabd6ef?w=1600&q=80" alt="Tomates frescos">
                 <div class="slide-overlay">
                     <div class="slide-contenido">
                         <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
@@ -320,15 +239,15 @@
                 </div>
             </div>
 
-            <!-- SLIDE 4 - Azúcar / Caña -->
+            <!-- SLIDE 4 - Caña de azúcar -->
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=1600&q=80" alt="Caña de azúcar">
+                <img class="slide-bg" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80" alt="Caña de azúcar">
                 <div class="slide-overlay">
                     <div class="slide-contenido">
                         <img src="logo_nortenita.png" alt="Norteñita" class="logo-slide">
                         <span class="slide-tag">Azúcar</span>
                         <h2>Azúcar de Caña</h2>
-                        <p>Azúcar común tipo A elaborada con caña tucumana. Calidad para uso doméstico e industrial.</p>
+                        <p>Azúcar común tipo A elaborada con caña tucumana, para uso doméstico e industrial.</p>
                         <a href="#productos" class="btn">Ver productos</a>
                     </div>
                 </div>
@@ -336,7 +255,6 @@
 
         </div>
 
-        <!-- Controles -->
         <button class="carrusel-prev" onclick="moverSlide(-1)"><i class="fas fa-chevron-left"></i></button>
         <button class="carrusel-next" onclick="moverSlide(1)"><i class="fas fa-chevron-right"></i></button>
         <div class="carrusel-dots" id="dots"></div>
@@ -498,7 +416,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -522,12 +439,11 @@
         let actual = 0;
         let intervalo;
 
-        // Crear dots
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             if (i === 0) dot.classList.add('activo');
-            dot.addEventListener('click', () => irA(i));
+            dot.addEventListener('click', () => { irA(i); reiniciarIntervalo(); });
             dotsContainer.appendChild(dot);
         });
 
@@ -539,15 +455,8 @@
             document.querySelectorAll('.dot')[actual].classList.add('activo');
         }
 
-        function moverSlide(dir) {
-            irA(actual + dir);
-            reiniciarIntervalo();
-        }
-
-        function reiniciarIntervalo() {
-            clearInterval(intervalo);
-            intervalo = setInterval(() => irA(actual + 1), 5000);
-        }
+        function moverSlide(dir) { irA(actual + dir); reiniciarIntervalo(); }
+        function reiniciarIntervalo() { clearInterval(intervalo); intervalo = setInterval(() => irA(actual + 1), 5000); }
 
         intervalo = setInterval(() => irA(actual + 1), 5000);
     </script>

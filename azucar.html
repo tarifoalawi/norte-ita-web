@@ -3,108 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea Azúcar — Norteñita</title>
+    <title>Azúcar — Norteñita</title>
     <link rel="icon" type="image/png" href="FAVICON.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --verde: #3a6b35; --verde-oscuro: #2a4f27; --dorado: #b5975a; --dorado-claro: #d4b97a; --crema: #f7f3ed; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', sans-serif; color: #2c2c2c; background: white; }
-        nav { background: var(--verde-oscuro); padding: 0.7rem 0; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--dorado); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo img { height: 55px; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--dorado-claro); }
-
-        .hero { position: relative; height: 520px; overflow: hidden; background: linear-gradient(135deg, #4a3520 0%, #8b6830 100%); display: flex; align-items: center; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
-        .hero-fruta-izq {
-            position: absolute; left: 0px; bottom: -10px;
-            width: 380px; opacity: 0;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
-            animation: entradaIzq 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s forwards, flotarSuave 6s ease-in-out 1.5s infinite;
-        }
-        .hero-fruta-der {
-            position: absolute; right: 20px; top: 30px;
-            width: 350px; opacity: 0;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
-            animation: entradaDer 1.2s cubic-bezier(0.22,1,0.36,1) 0.6s forwards, flotarSuave 6s ease-in-out 1.8s infinite reverse;
-        }
-        @keyframes entradaIzq {
-            from { opacity: 0; transform: translateX(-80px) scale(0.85); }
-            to   { opacity: 0.9; transform: translateX(0) scale(1); }
-        }
-        @keyframes entradaDer {
-            from { opacity: 0; transform: translateX(80px) scale(0.85); }
-            to   { opacity: 0.85; transform: translateX(0) scale(1); }
-        }
-        @keyframes flotarSuave {
-            0%, 100% { transform: translateY(0px) rotate(-1deg); }
-            33%  { transform: translateY(-12px) rotate(1deg); }
-            66%  { transform: translateY(-6px) rotate(-0.5deg); }
-        }
-        .hero-badge { opacity: 0; animation: revelarArriba 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
-        .hero-contenido h1 { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
-        .hero-contenido p { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
-        @keyframes revelarArriba {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.15s; }
-        .producto-card::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transition: left 0.5s ease; }
-        .producto-card { position: relative; overflow: hidden; }
-        .producto-card:hover::after { left: 150%; }
-        .hero-contenido { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 3rem; color: white; }
-        .hero-badge { display: inline-block; background: var(--dorado); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1rem; }
-        .hero-contenido h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; text-shadow: 0 2px 15px rgba(0,0,0,0.4); }
-        .hero-contenido p { font-size: 1.1rem; opacity: 0.9; max-width: 500px; line-height: 1.7; }
-
-        .descripcion { background: var(--crema); padding: 5rem 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .desc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .desc-texto h2 { font-size: 1.8rem; color: var(--verde-oscuro); margin-bottom: 1rem; }
-        .desc-texto p { color: #555; line-height: 1.8; margin-bottom: 1rem; }
-        .desc-imagen img { width: 100%; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
-
-        .productos-seccion { background: white; padding: 5rem 0; }
-        .section-title { text-align: center; margin-bottom: 3rem; }
-        .section-title h2 { font-size: 2rem; color: var(--verde-oscuro); margin-bottom: 0.5rem; }
-        .linea { width: 60px; height: 3px; background: var(--dorado); margin: 0 auto; border-radius: 2px; }
-        .productos-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 2rem; max-width: 380px; margin: 0 auto; }
-        .producto-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.07); transition: all 0.3s; border: 1px solid #eee; }
-        .producto-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(58,107,53,0.12); border-color: var(--dorado); }
-        .producto-img { background: var(--crema); height: 260px; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-        .producto-img img { max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 0.3s; }
-        .producto-card:hover .producto-img img { transform: scale(1.05); }
-        .producto-info { padding: 1.2rem 1.4rem 1.5rem; }
-        .producto-cat { font-size: 0.72rem; color: var(--dorado); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
-        .producto-info h3 { color: var(--verde-oscuro); font-size: 1.05rem; margin-bottom: 0.5rem; }
-        .producto-info p { color: #777; font-size: 0.88rem; line-height: 1.6; }
-
-        .ficha { background: var(--verde-oscuro); padding: 5rem 0; color: white; }
-        .ficha h2 { font-size: 2rem; text-align: center; margin-bottom: 0.5rem; }
-        .ficha .linea { background: var(--dorado); margin-bottom: 3rem; }
-        .ficha-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .ficha-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; text-align: center; }
-        .ficha-item i { font-size: 2rem; color: var(--dorado-claro); margin-bottom: 0.8rem; display: block; }
-        .ficha-item h4 { color: var(--dorado-claro); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
-        .ficha-item p { color: white; font-size: 1.3rem; font-weight: 700; }
-        .ficha-item span { color: rgba(255,255,255,0.6); font-size: 0.8rem; display: block; margin-top: 0.2rem; }
-
-        footer { background: var(--verde-oscuro); border-top: 3px solid var(--dorado); color: white; padding: 2rem 0; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .footer-logo img { height: 50px; }
-        .footer-text p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
-        .social { display: flex; gap: 0.8rem; }
-        .social a { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; transition: background 0.3s; text-decoration: none; }
-        .social a:hover { background: var(--dorado); }
-
-        @media (max-width: 900px) { .desc-grid { grid-template-columns: 1fr; } .ficha-grid { grid-template-columns: repeat(2,1fr); } .hero-fruta-izq, .hero-fruta-der { width: 220px; opacity: 0.5; } }
-        @media (max-width: 600px) { .nav-links { display: none; } .ficha-grid { grid-template-columns: 1fr; } .hero-contenido h1 { font-size: 2rem; } .hero-fruta-der { display: none; } .footer-content { flex-direction: column; text-align: center; } }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{--verde:#3a6b35;--verde-oscuro:#2a4f27;--dorado:#b5975a;--dorado-claro:#d4b97a;--crema:#f7f3ed;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'Segoe UI',sans-serif;color:#2c2c2c;}
+        nav{background:var(--verde-oscuro);padding:.7rem 0;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--dorado);}
+        .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 2rem;}
+        .logo img{height:55px;}
+        .nav-links{display:flex;gap:2rem;list-style:none;}
+        .nav-links a{color:rgba(255,255,255,.9);text-decoration:none;font-size:.95rem;font-weight:500;transition:color .3s;}
+        .nav-links a:hover,.nav-links a.active{color:var(--dorado-claro);}
+        .hero{position:relative;height:560px;overflow:hidden;}
+        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;}
+        .hero-slide.activo{opacity:1;}
+        .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center;}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(60,40,10,.88) 0%,rgba(60,40,10,.55) 55%,rgba(60,40,10,.1) 100%);}
+        .hero-texto{position:absolute;inset:0;display:flex;align-items:center;z-index:2;padding:0 4rem;}
+        .hero-inner{max-width:580px;}
+        .hero-badge{display:inline-block;background:var(--dorado);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;opacity:0;animation:fadeUp .8s .2s ease forwards;}
+        .hero-inner h1{font-size:3rem;font-weight:800;color:#fff;line-height:1.1;text-shadow:0 2px 15px rgba(0,0,0,.4);opacity:0;animation:fadeUp .9s .4s ease forwards;}
+        .hero-inner p{font-size:1.05rem;color:rgba(255,255,255,.88);margin-top:.8rem;line-height:1.7;opacity:0;animation:fadeUp .9s .6s ease forwards;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+        .hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
+        .hero-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;}
+        .hero-dot.activo{background:var(--dorado);transform:scale(1.3);}
+        .hero-prev,.hero-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background .3s;font-size:1rem;}
+        .hero-prev:hover,.hero-next:hover{background:rgba(255,255,255,.3);}
+        .hero-prev{left:20px;}.hero-next{right:20px;}
+        .descripcion{background:var(--crema);padding:5rem 0;}
+        .container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+        .desc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+        .desc-texto h2{font-size:1.8rem;color:var(--verde-oscuro);margin-bottom:1rem;}
+        .desc-texto p{color:#555;line-height:1.8;margin-bottom:1rem;}
+        .desc-imagen img{width:100%;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.12);}
+        .productos-seccion{background:#fff;padding:5rem 0;}
+        .section-title{text-align:center;margin-bottom:3rem;}
+        .section-title h2{font-size:2rem;color:var(--verde-oscuro);margin-bottom:.5rem;}
+        .linea-deco{width:60px;height:3px;background:var(--dorado);margin:0 auto;border-radius:2px;}
+        .producto-unico{max-width:360px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.07);border:1px solid #eee;transition:all .3s;}
+        .producto-unico:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(58,107,53,.15);border-color:var(--dorado);}
+        .producto-img{background:var(--crema);height:280px;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+        .producto-img img{max-height:100%;max-width:100%;object-fit:contain;transition:transform .3s;}
+        .producto-unico:hover .producto-img img{transform:scale(1.06);}
+        .producto-info{padding:1.2rem 1.4rem 1.5rem;}
+        .producto-cat{font-size:.72rem;color:var(--dorado);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem;}
+        .producto-info h3{color:var(--verde-oscuro);font-size:1.05rem;margin-bottom:.5rem;}
+        .producto-info p{color:#777;font-size:.88rem;line-height:1.6;}
+        .ficha{background:#1a1a1a;padding:5rem 0;color:#fff;}
+        .ficha-header{text-align:center;margin-bottom:3rem;}
+        .ficha-header h2{font-size:2.2rem;color:#fff;margin-bottom:.5rem;}
+        .ficha-header p{color:rgba(255,255,255,.6);margin-top:.8rem;}
+        .ficha-subtitulo{text-align:center;color:var(--dorado-claro);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;}
+        .ficha-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;}
+        .ficha-card{background:linear-gradient(135deg,rgba(181,151,90,.15),rgba(181,151,90,.05));border:1px solid rgba(181,151,90,.4);border-radius:16px;padding:2rem;text-align:center;transition:all .3s;}
+        .ficha-card:hover{background:linear-gradient(135deg,rgba(181,151,90,.25),rgba(181,151,90,.1));transform:translateY(-4px);}
+        .ficha-card i{font-size:2.2rem;color:var(--dorado);margin-bottom:1rem;display:block;}
+        .ficha-card h4{color:var(--dorado-claro);font-size:.78rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;}
+        .ficha-card .valor{font-size:2.5rem;font-weight:800;color:#fff;line-height:1;}
+        .ficha-card .unidad{color:rgba(255,255,255,.5);font-size:.85rem;margin-top:.3rem;}
+        footer{background:var(--verde-oscuro);border-top:3px solid var(--dorado);color:#fff;padding:2rem 0;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+        .footer-logo img{height:50px;}
+        .footer-text p{color:rgba(255,255,255,.6);font-size:.85rem;}
+        .social{display:flex;gap:.8rem;}
+        .social a{width:36px;height:36px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;transition:background .3s;text-decoration:none;}
+        .social a:hover{background:var(--dorado);}
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+        .reveal.visible{opacity:1;transform:translateY(0);}
+        @media(max-width:900px){.desc-grid{grid-template-columns:1fr;}.ficha-cards{grid-template-columns:repeat(2,1fr);}}
+        @media(max-width:600px){.nav-links{display:none;}.ficha-cards{grid-template-columns:1fr;}.hero-inner h1{font-size:2rem;}.hero-texto{padding:0 2rem;}.footer-content{flex-direction:column;text-align:center;}}
     </style>
 </head>
 <body>
@@ -122,14 +93,20 @@
     </nav>
 
     <div class="hero">
-        <img class="hero-bg" src="azucar_bowl.jpg" alt="Azúcar">
-        <img class="hero-fruta-izq" src="azucar_bowl.jpg" alt="Azúcar">
-        <img class="hero-fruta-der" src="azucar_cuchara.jpg" alt="Azúcar">
-        <div class="hero-contenido">
-            <span class="hero-badge">Azúcar</span>
-            <h1>Azúcar puro,<br>calidad garantizada</h1>
-            <p>Azúcar común tipo A elaborado con caña tucumana. Ideal para uso doméstico, gastronómico e industrial.</p>
+        <div class="hero-slide activo"><img src="AZUCAR_PAGINA.jpg" alt="Azúcar"><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><img src="azucar_bowl.jpg" alt="Azúcar en bowl"><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><img src="azucar_cuchara.jpg" alt="Azúcar en cuchara"><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><img src="azcuar.png" alt="Azúcar"><div class="hero-overlay"></div></div>
+        <div class="hero-texto">
+            <div class="hero-inner">
+                <span class="hero-badge">Azúcar</span>
+                <h1>Azúcar puro,<br>calidad garantizada</h1>
+                <p>Azúcar común tipo A elaborado en Tucumán. Ideal para uso doméstico, gastronómico e industrial.</p>
+            </div>
         </div>
+        <button class="hero-prev" onclick="moverHero(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-next" onclick="moverHero(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="hero-dots" id="heroDots"></div>
     </div>
 
     <section class="descripcion">
@@ -139,24 +116,22 @@
                     <h2>Producción local de calidad</h2>
                     <p>Tucumán es la principal provincia productora de caña de azúcar de Argentina. Norteñita aprovecha esta riqueza regional para ofrecer azúcar de primera calidad, procesada con los más altos estándares.</p>
                     <p>Nuestro azúcar común tipo A es ideal para repostería, bebidas, conservas y múltiples aplicaciones culinarias e industriales.</p>
-                    <p>Disponible en presentación de 1 kg para distribución minorista.</p>
+                    <p>Disponible en bolsa de 1 kg para distribución minorista y mayorista.</p>
                 </div>
-                <div class="desc-imagen"><img src="azucar_cuchara.jpg" alt="Azúcar"></div>
+                <div class="desc-imagen"><img src="azucar_bowl.jpg" alt="Azúcar"></div>
             </div>
         </div>
     </section>
 
     <section class="productos-seccion">
         <div class="container">
-            <div class="section-title"><h2>Nuestro Azúcar</h2><div class="linea"></div></div>
-            <div class="productos-grid">
-                <div class="producto-card">
-                    <div class="producto-img"><img src="azucar.jpeg" alt="Azúcar Norteñita"></div>
-                    <div class="producto-info">
-                        <div class="producto-cat">Azúcar</div>
-                        <h3>Azúcar Común Tipo A</h3>
-                        <p>Azúcar de caña refinada. Industria Argentina. Presentación 1 kg.</p>
-                    </div>
+            <div class="section-title reveal"><h2>Nuestro Azúcar</h2><div class="linea-deco"></div></div>
+            <div class="producto-unico reveal">
+                <div class="producto-img"><img src="azucar.jpeg" alt="Azúcar Norteñita"></div>
+                <div class="producto-info">
+                    <div class="producto-cat">Azúcar</div>
+                    <h3>Azúcar Común Tipo A</h3>
+                    <p>Azúcar de caña refinada. Industria Argentina. Presentación bolsa de 1 kg.</p>
                 </div>
             </div>
         </div>
@@ -164,13 +139,31 @@
 
     <section class="ficha">
         <div class="container">
-            <h2>Ficha Técnica</h2>
-            <div class="linea"></div>
-            <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Bolsa x 1 Kg</p>
-            <div class="ficha-grid" style="margin-top: 0; max-width:800px; margin:0 auto;">
-                <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>150</p><span>fardos</span></div>
-                <div class="ficha-item"><i class="fas fa-weight-hanging"></i><h4>Peso Neto</h4><p>1 Kg</p><span>por unidad</span></div>
-                <div class="ficha-item"><i class="fas fa-industry"></i><h4>Origen</h4><p>Tucumán</p><span>Industria Argentina</span></div>
+            <div class="ficha-header reveal">
+                <h2>Ficha Técnica</h2>
+                <div class="linea-deco" style="background:var(--dorado);margin:.8rem auto 1rem;"></div>
+                <p>Bolsa x 1 Kg — Azúcar Común Tipo A</p>
+            </div>
+            <div class="ficha-subtitulo reveal">Información de packaging y logística</div>
+            <div class="ficha-cards reveal">
+                <div class="ficha-card">
+                    <i class="fas fa-pallet"></i>
+                    <h4>Por Pallet</h4>
+                    <div class="valor">150</div>
+                    <div class="unidad">fardos</div>
+                </div>
+                <div class="ficha-card">
+                    <i class="fas fa-weight-hanging"></i>
+                    <h4>Peso Neto</h4>
+                    <div class="valor">1</div>
+                    <div class="unidad">Kg por unidad</div>
+                </div>
+                <div class="ficha-card">
+                    <i class="fas fa-industry"></i>
+                    <h4>Origen</h4>
+                    <div class="valor" style="font-size:1.4rem;">Tucumán</div>
+                    <div class="unidad">Industria Argentina</div>
+                </div>
             </div>
         </div>
     </section>
@@ -188,9 +181,16 @@
             </div>
         </div>
     </footer>
-<script>
-const obs = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting) x.target.classList.add("visible"); }); }, {threshold:0.1});
-document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-</script>
+    <script>
+        const slides=document.querySelectorAll('.hero-slide'),dotsC=document.getElementById('heroDots');
+        let cur=0,timer;
+        slides.forEach((_,i)=>{const d=document.createElement('div');d.className='hero-dot'+(i===0?' activo':'');d.onclick=()=>{irA(i);reset();};dotsC.appendChild(d);});
+        function irA(n){slides[cur].classList.remove('activo');document.querySelectorAll('.hero-dot')[cur].classList.remove('activo');cur=(n+slides.length)%slides.length;slides[cur].classList.add('activo');document.querySelectorAll('.hero-dot')[cur].classList.add('activo');}
+        function moverHero(d){irA(cur+d);reset();}
+        function reset(){clearInterval(timer);timer=setInterval(()=>irA(cur+1),5000);}
+        timer=setInterval(()=>irA(cur+1),5000);
+        const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    </script>
 </body>
 </html>

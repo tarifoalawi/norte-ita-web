@@ -42,20 +42,50 @@
         }
         .hero-fruta-izq {
             position: absolute; left: -40px; bottom: -20px;
-            width: 420px; opacity: 0.85;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-            animation: flotar 4s ease-in-out infinite;
+            width: 420px; opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            animation: entradaIzq 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s forwards, flotarSuave 6s ease-in-out 1.5s infinite;
         }
         .hero-fruta-der {
             position: absolute; right: -30px; top: -10px;
-            width: 380px; opacity: 0.8;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-            animation: flotar 4s ease-in-out infinite reverse;
+            width: 380px; opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            animation: entradaDer 1.2s cubic-bezier(0.22,1,0.36,1) 0.6s forwards, flotarSuave 6s ease-in-out 1.8s infinite reverse;
         }
-        @keyframes flotar {
-            0%, 100% { transform: translateY(0px) rotate(-2deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
+        @keyframes entradaIzq {
+            from { opacity: 0; transform: translateX(-80px) scale(0.85); }
+            to   { opacity: 0.85; transform: translateX(0) scale(1); }
         }
+        @keyframes entradaDer {
+            from { opacity: 0; transform: translateX(80px) scale(0.85); }
+            to   { opacity: 0.8; transform: translateX(0) scale(1); }
+        }
+        @keyframes flotarSuave {
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            33%  { transform: translateY(-12px) rotate(1deg); }
+            66%  { transform: translateY(-6px) rotate(-0.5deg); }
+        }
+        .hero-badge { opacity: 0; animation: revelarArriba 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+        .hero-contenido h1 { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+        .hero-contenido p { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
+        @keyframes revelarArriba {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        /* Reveal al hacer scroll */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        /* Hover en producto con brillo */
+        .producto-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .producto-card { position: relative; overflow: hidden; }
+        .producto-card:hover::after { left: 150%; }
         .hero-contenido {
             position: relative; z-index: 2;
             max-width: 1200px; margin: 0 auto; padding: 0 3rem;
@@ -177,7 +207,7 @@
     <!-- DESCRIPCION -->
     <section class="descripcion">
         <div class="container">
-            <div class="desc-grid">
+            <div class="desc-grid reveal">
                 <div class="desc-texto">
                     <h2>Tradición en cada producto</h2>
                     <p>Nuestra línea de dulces nace de la selección cuidadosa de batatas y membrillos cosechados en su punto justo de madurez. Cada lote es elaborado bajo estrictos controles de calidad para garantizar el mejor sabor.</p>
@@ -199,7 +229,7 @@
                 <div class="linea"></div>
             </div>
             <div class="productos-grid">
-                <div class="producto-card">
+                <div class="producto-card reveal">
                     <div class="producto-img"><img src="dulce_de_vatata_a_la_vainilla.jpeg" alt="Dulce de Batata Vainilla"></div>
                     <div class="producto-info">
                         <div class="producto-cat">Dulce de Batata</div>
@@ -207,7 +237,7 @@
                         <p>Batata fresca con vainilla natural. Textura firme y sabor equilibrado. Presentación 5 kg.</p>
                     </div>
                 </div>
-                <div class="producto-card">
+                <div class="producto-card reveal reveal-delay-1">
                     <div class="producto-img"><img src="dulce_de_batata_con_chocolate.jpeg" alt="Dulce de Batata Chocolate"></div>
                     <div class="producto-info">
                         <div class="producto-cat">Dulce de Batata</div>
@@ -215,7 +245,7 @@
                         <p>La combinación clásica de batata y chocolate, ideal para repostería. Presentación 5 kg.</p>
                     </div>
                 </div>
-                <div class="producto-card">
+                <div class="producto-card reveal reveal-delay-2">
                     <div class="producto-img"><img src="dulce_de_membrillo.jpeg" alt="Dulce de Membrillo"></div>
                     <div class="producto-info">
                         <div class="producto-cat">Dulce de Membrillo</div>
@@ -238,25 +268,41 @@
                 <div class="ficha-tab" onclick="mostrarFicha('membrillo', this)">Membrillo</div>
             </div>
 
+            <!-- Cajón 5kg - aplica a todos los dulces -->
             <div class="ficha-content activo" id="batata-vainilla">
+                <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Cajón x 5 Kg</p>
                 <div class="ficha-grid">
-                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+                    <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>200</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>20</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-weight-hanging"></i><h4>Peso Neto</h4><p>5 Kg</p><span>por unidad</span></div>
+                </div>
+                <div style="margin-top:2rem; padding:1.2rem; background:rgba(255,255,255,0.06); border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                    <p style="text-align:center; color:var(--dorado-claro); font-size:0.85rem; margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:1px;">También disponible en</p>
+                    <p style="text-align:center; color:white; font-size:0.95rem;">Botella x 1 Kg — Pallet: 84 fardos · Base: 21 fardos · Bulto: 8 unidades</p>
                 </div>
             </div>
             <div class="ficha-content" id="batata-chocolate">
+                <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Cajón x 5 Kg</p>
                 <div class="ficha-grid">
-                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+                    <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>200</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>20</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-weight-hanging"></i><h4>Peso Neto</h4><p>5 Kg</p><span>por unidad</span></div>
+                </div>
+                <div style="margin-top:2rem; padding:1.2rem; background:rgba(255,255,255,0.06); border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                    <p style="text-align:center; color:var(--dorado-claro); font-size:0.85rem; margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:1px;">También disponible en</p>
+                    <p style="text-align:center; color:white; font-size:0.95rem;">Botella x 1 Kg — Pallet: 84 fardos · Base: 21 fardos · Bulto: 8 unidades</p>
                 </div>
             </div>
             <div class="ficha-content" id="membrillo">
+                <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Cajón x 5 Kg</p>
                 <div class="ficha-grid">
-                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+                    <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>200</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>20</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-weight-hanging"></i><h4>Peso Neto</h4><p>5 Kg</p><span>por unidad</span></div>
+                </div>
+                <div style="margin-top:2rem; padding:1.2rem; background:rgba(255,255,255,0.06); border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                    <p style="text-align:center; color:var(--dorado-claro); font-size:0.85rem; margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:1px;">También disponible en</p>
+                    <p style="text-align:center; color:white; font-size:0.95rem;">Botella x 1 Kg — Pallet: 84 fardos · Base: 21 fardos · Bulto: 8 unidades</p>
                 </div>
             </div>
         </div>
@@ -283,6 +329,11 @@
             document.getElementById(id).classList.add('activo');
             el.classList.add('activo');
         }
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

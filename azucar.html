@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea Azúcar — Norteñita</title>
+    <link rel="icon" type="image/png" href="FAVICON.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --verde: #3a6b35; --verde-oscuro: #2a4f27; --dorado: #b5975a; --dorado-claro: #d4b97a; --crema: #f7f3ed; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; color: #2c2c2c; background: white; }
+        nav { background: var(--verde-oscuro); padding: 0.7rem 0; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--dorado); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo img { height: 55px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--dorado-claro); }
+
+        .hero { position: relative; height: 520px; overflow: hidden; background: linear-gradient(135deg, #4a3520 0%, #8b6830 100%); display: flex; align-items: center; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
+        .hero-fruta-izq { position: absolute; left: 0px; bottom: -10px; width: 380px; opacity: 0.9; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); animation: flotar 4s ease-in-out infinite; }
+        .hero-fruta-der { position: absolute; right: 20px; top: 30px; width: 350px; opacity: 0.85; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); animation: flotar 4s ease-in-out infinite reverse; }
+        @keyframes flotar { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        .hero-contenido { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 3rem; color: white; }
+        .hero-badge { display: inline-block; background: var(--dorado); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1rem; }
+        .hero-contenido h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; text-shadow: 0 2px 15px rgba(0,0,0,0.4); }
+        .hero-contenido p { font-size: 1.1rem; opacity: 0.9; max-width: 500px; line-height: 1.7; }
+
+        .descripcion { background: var(--crema); padding: 5rem 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .desc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .desc-texto h2 { font-size: 1.8rem; color: var(--verde-oscuro); margin-bottom: 1rem; }
+        .desc-texto p { color: #555; line-height: 1.8; margin-bottom: 1rem; }
+        .desc-imagen img { width: 100%; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
+
+        .productos-seccion { background: white; padding: 5rem 0; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2rem; color: var(--verde-oscuro); margin-bottom: 0.5rem; }
+        .linea { width: 60px; height: 3px; background: var(--dorado); margin: 0 auto; border-radius: 2px; }
+        .productos-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 2rem; max-width: 380px; margin: 0 auto; }
+        .producto-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.07); transition: all 0.3s; border: 1px solid #eee; }
+        .producto-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(58,107,53,0.12); border-color: var(--dorado); }
+        .producto-img { background: var(--crema); height: 260px; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+        .producto-img img { max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 0.3s; }
+        .producto-card:hover .producto-img img { transform: scale(1.05); }
+        .producto-info { padding: 1.2rem 1.4rem 1.5rem; }
+        .producto-cat { font-size: 0.72rem; color: var(--dorado); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+        .producto-info h3 { color: var(--verde-oscuro); font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .producto-info p { color: #777; font-size: 0.88rem; line-height: 1.6; }
+
+        .ficha { background: var(--verde-oscuro); padding: 5rem 0; color: white; }
+        .ficha h2 { font-size: 2rem; text-align: center; margin-bottom: 0.5rem; }
+        .ficha .linea { background: var(--dorado); margin-bottom: 3rem; }
+        .ficha-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .ficha-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .ficha-item i { font-size: 2rem; color: var(--dorado-claro); margin-bottom: 0.8rem; display: block; }
+        .ficha-item h4 { color: var(--dorado-claro); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+        .ficha-item p { color: white; font-size: 1.3rem; font-weight: 700; }
+        .ficha-item span { color: rgba(255,255,255,0.6); font-size: 0.8rem; display: block; margin-top: 0.2rem; }
+
+        footer { background: var(--verde-oscuro); border-top: 3px solid var(--dorado); color: white; padding: 2rem 0; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-logo img { height: 50px; }
+        .footer-text p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+        .social { display: flex; gap: 0.8rem; }
+        .social a { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; transition: background 0.3s; text-decoration: none; }
+        .social a:hover { background: var(--dorado); }
+
+        @media (max-width: 900px) { .desc-grid { grid-template-columns: 1fr; } .ficha-grid { grid-template-columns: repeat(2,1fr); } .hero-fruta-izq, .hero-fruta-der { width: 220px; opacity: 0.5; } }
+        @media (max-width: 600px) { .nav-links { display: none; } .ficha-grid { grid-template-columns: 1fr; } .hero-contenido h1 { font-size: 2rem; } .hero-fruta-der { display: none; } .footer-content { flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><a href="index.html"><img src="logo_nortenita.png" alt="Norteñita"></a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="dulces.html">Dulces</a></li>
+                <li><a href="tomates.html">Tomates</a></li>
+                <li><a href="azucar.html" class="active">Azúcar</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img class="hero-bg" src="azucar_bowl.jpg" alt="Azúcar">
+        <img class="hero-fruta-izq" src="azucar_bowl.jpg" alt="Azúcar">
+        <img class="hero-fruta-der" src="azucar_cuchara.jpg" alt="Azúcar">
+        <div class="hero-contenido">
+            <span class="hero-badge">Azúcar</span>
+            <h1>Azúcar puro,<br>calidad garantizada</h1>
+            <p>Azúcar común tipo A elaborado con caña tucumana. Ideal para uso doméstico, gastronómico e industrial.</p>
+        </div>
+    </div>
+
+    <section class="descripcion">
+        <div class="container">
+            <div class="desc-grid">
+                <div class="desc-texto">
+                    <h2>Producción local de calidad</h2>
+                    <p>Tucumán es la principal provincia productora de caña de azúcar de Argentina. Norteñita aprovecha esta riqueza regional para ofrecer azúcar de primera calidad, procesada con los más altos estándares.</p>
+                    <p>Nuestro azúcar común tipo A es ideal para repostería, bebidas, conservas y múltiples aplicaciones culinarias e industriales.</p>
+                    <p>Disponible en presentación de 1 kg para distribución minorista.</p>
+                </div>
+                <div class="desc-imagen"><img src="azucar_cuchara.jpg" alt="Azúcar"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="productos-seccion">
+        <div class="container">
+            <div class="section-title"><h2>Nuestro Azúcar</h2><div class="linea"></div></div>
+            <div class="productos-grid">
+                <div class="producto-card">
+                    <div class="producto-img"><img src="azucar.jpeg" alt="Azúcar Norteñita"></div>
+                    <div class="producto-info">
+                        <div class="producto-cat">Azúcar</div>
+                        <h3>Azúcar Común Tipo A</h3>
+                        <p>Azúcar de caña refinada. Industria Argentina. Presentación 1 kg.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ficha">
+        <div class="container">
+            <h2>Ficha Técnica</h2>
+            <div class="linea"></div>
+            <div class="ficha-grid" style="margin-top: 2rem;">
+                <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
+                <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
+                <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo"><img src="logo_nortenita.png" alt="Norteñita"></div>
+                <div class="footer-text"><p>&copy; 2025 Norteñita — Industria Argentina</p><p>San Miguel de Tucumán, Argentina</p></div>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/nortenita.arg" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

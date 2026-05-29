@@ -20,9 +20,44 @@
 
         .hero { position: relative; height: 520px; overflow: hidden; background: linear-gradient(135deg, #7a0000 0%, #c0392b 100%); display: flex; align-items: center; }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
-        .hero-fruta-izq { position: absolute; left: -20px; bottom: -30px; width: 400px; opacity: 0.9; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4)); animation: flotar 4s ease-in-out infinite; }
-        .hero-fruta-der { position: absolute; right: 20px; top: 20px; width: 350px; opacity: 0.85; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4)); animation: flotar 4s ease-in-out infinite reverse; }
-        @keyframes flotar { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        .hero-fruta-izq {
+            position: absolute; left: 0px; bottom: -10px;
+            width: 380px; opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            animation: entradaIzq 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s forwards, flotarSuave 6s ease-in-out 1.5s infinite;
+        }
+        .hero-fruta-der {
+            position: absolute; right: 20px; top: 30px;
+            width: 350px; opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            animation: entradaDer 1.2s cubic-bezier(0.22,1,0.36,1) 0.6s forwards, flotarSuave 6s ease-in-out 1.8s infinite reverse;
+        }
+        @keyframes entradaIzq {
+            from { opacity: 0; transform: translateX(-80px) scale(0.85); }
+            to   { opacity: 0.9; transform: translateX(0) scale(1); }
+        }
+        @keyframes entradaDer {
+            from { opacity: 0; transform: translateX(80px) scale(0.85); }
+            to   { opacity: 0.85; transform: translateX(0) scale(1); }
+        }
+        @keyframes flotarSuave {
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            33%  { transform: translateY(-12px) rotate(1deg); }
+            66%  { transform: translateY(-6px) rotate(-0.5deg); }
+        }
+        .hero-badge { opacity: 0; animation: revelarArriba 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+        .hero-contenido h1 { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+        .hero-contenido p { opacity: 0; animation: revelarArriba 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
+        @keyframes revelarArriba {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .producto-card::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transition: left 0.5s ease; }
+        .producto-card { position: relative; overflow: hidden; }
+        .producto-card:hover::after { left: 150%; }
         .hero-contenido { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 3rem; color: white; }
         .hero-badge { display: inline-block; background: var(--dorado); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1rem; }
         .hero-contenido h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; text-shadow: 0 2px 15px rgba(0,0,0,0.4); }
@@ -104,7 +139,7 @@
 
     <section class="descripcion">
         <div class="container">
-            <div class="desc-grid">
+            <div class="desc-grid reveal">
                 <div class="desc-texto">
                     <h2>Del campo a tu mesa</h2>
                     <p>Seleccionamos los mejores tomates cultivados en suelos fértiles del norte argentino. El proceso de triturado se realiza en horas para preservar el color, el sabor y los nutrientes naturales.</p>
@@ -149,17 +184,19 @@
                 <div class="ficha-tab" onclick="mostrarFicha('botella', this)">Botella 980 gr</div>
             </div>
             <div class="ficha-content activo" id="lata">
+                <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Lata x 8 Kg</p>
                 <div class="ficha-grid">
-                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+                    <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>96</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>24</p><span>unidades</span></div>
+                    <div class="ficha-item"><i class="fas fa-weight-hanging"></i><h4>Peso Neto</h4><p>8 Kg</p><span>por unidad</span></div>
                 </div>
             </div>
             <div class="ficha-content" id="botella">
+                <p style="text-align:center; color:var(--dorado-claro); margin-bottom:1.5rem; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Botella x 980 Gr</p>
                 <div class="ficha-grid">
-                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>—</p><span>A completar</span></div>
-                    <div class="ficha-item"><i class="fas fa-pallet"></i><h4>Por Pallet</h4><p>—</p><span>A completar</span></div>
+                    <div class="ficha-item"><i class="fas fa-boxes-stacked"></i><h4>Por Pallet</h4><p>84</p><span>fardos</span></div>
+                    <div class="ficha-item"><i class="fas fa-layer-group"></i><h4>Por Base</h4><p>21</p><span>fardos</span></div>
+                    <div class="ficha-item"><i class="fas fa-box"></i><h4>Por Bulto</h4><p>8</p><span>unidades</span></div>
                 </div>
             </div>
         </div>

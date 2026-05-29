@@ -103,9 +103,9 @@
             cursor: pointer; z-index: 10; transition: background 0.3s; font-size: 1rem;
         }
         .carrusel-prev:hover, .carrusel-next:hover { background: rgba(255,255,255,0.3); }
-        .carrusel-prev { right: 70px; }
-        .carrusel-next { right: 20px; }
-        .carrusel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .carrusel-prev { right: 110px; bottom: 20px; top: auto; transform: none; }
+        .carrusel-next { right: 60px; bottom: 20px; top: auto; transform: none; }
+        .carrusel-dots { position: absolute; bottom: 26px; right: 165px; display: flex; gap: 8px; z-index: 10; align-items: center; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; }
         .dot.activo { background: var(--dorado); transform: scale(1.3); }
 
@@ -191,7 +191,7 @@
             .slide-contenido h2 { font-size: 1.6rem; }
             .slide-contenido .logo-slide { width: 160px; }
             .footer-content { flex-direction: column; text-align: center; }
-            .carrusel-prev { right: 60px; }
+            
         }
     </style>
 </head>
@@ -409,7 +409,7 @@
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon"><i class="fas fa-envelope"></i></div>
-                        <div><h4>Email</h4><p>info@norteñita.com.ar</p></div>
+                        <div><h4>Email</h4><p>info@norteñita.com</p></div>
                     </div>
                 </div>
                 <div class="form-card">

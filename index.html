@@ -106,8 +106,8 @@
         .carrusel-prev:hover, .carrusel-next:hover { background: rgba(181,151,90,0.7); border-color: var(--dorado); }
         .carrusel-prev { left: 15px; }
         .carrusel-next { right: 15px; }
-        .carrusel-dots { position: absolute; bottom: 22px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; align-items: center; left: 0; }
-        .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.3s; }
+        .carrusel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; flex-shrink: 0; }
         .dot.activo { background: var(--dorado); width: 22px; border-radius: 4px; }
 
         /* SECCIONES */
@@ -209,11 +209,7 @@
         .menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 998; }
         .menu-overlay.activo { display: block; }
         .cerrar-menu { position: absolute; top: 1.2rem; right: 1.2rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-        @media(max-width:768px) {
-            .nav-links { display: none !important; }
-            .hamburger { display: flex; }
-            .menu-movil { display: flex; }
-        }
+        @media(max-width:768px) { .nav-links { display: none !important; } .hamburger { display: flex !important; } .menu-movil { display: flex; } }
     </style>
 </head>
 <body>

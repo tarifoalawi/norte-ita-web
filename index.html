@@ -36,7 +36,8 @@
         /* HERO CON CARRUSEL */
         .hero { position: relative; height: 600px; overflow: hidden; }
         .carrusel { position: relative; width: 100%; height: 100%; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s ease-in-out; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s ease-in-out; pointer-events: none; }
+        .slide.activo { pointer-events: auto; }
         .slide.activo { opacity: 1; }
         .slide.activo .slide-contenido { animation: slideIn 1s ease-out forwards; }
         @keyframes slideIn {

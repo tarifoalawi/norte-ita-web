@@ -106,7 +106,7 @@
         .carrusel-prev:hover, .carrusel-next:hover { background: rgba(181,151,90,0.7); border-color: var(--dorado); }
         .carrusel-prev { left: 15px; }
         .carrusel-next { right: 15px; }
-        .carrusel-dots { position: absolute; bottom: 22px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; align-items: center; }
+        .carrusel-dots { position: absolute; bottom: 22px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; align-items: center; left: 0; }
         .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.3s; }
         .dot.activo { background: var(--dorado); width: 22px; border-radius: 4px; }
 
@@ -196,8 +196,9 @@
         }
 
         /* MENU MOVIL */
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-        .hamburger span { display: block; width: 25px; height: 2px; background: white; border-radius: 2px; transition: all .3s; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: rgba(181,151,90,0.2); border: 1px solid rgba(181,151,90,0.4); border-radius: 8px; transition: all .3s; }
+        .hamburger:hover { background: rgba(181,151,90,0.35); }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--dorado-claro); border-radius: 2px; transition: all .3s; }
         .hamburger.activo span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.activo span:nth-child(2) { opacity: 0; }
         .hamburger.activo span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -243,7 +244,7 @@
                         <span class="slide-tag">Línea Dulces</span>
                         <h2>Dulce de Batata</h2>
                         <p>Elaborado con batatas frescas seleccionadas, con el sabor de siempre.</p>
-                        <a href="#productos" class="btn">Ver productos</a>
+                        <a href="dulces.html" class="btn">Ver productos</a>
                     </div>
                 </div>
             </div>
@@ -256,7 +257,7 @@
                         <span class="slide-tag">Línea Dulces</span>
                         <h2>Dulce de Membrillo</h2>
                         <p>Membrillos maduros y naturales, convertidos en el dulce clásico de la mesa argentina.</p>
-                        <a href="#productos" class="btn">Ver productos</a>
+                        <a href="dulces.html" class="btn">Ver productos</a>
                     </div>
                 </div>
             </div>
@@ -269,7 +270,7 @@
                         <span class="slide-tag">Línea Tomates</span>
                         <h2>Tomates Triturados</h2>
                         <p>Procesados naturalmente, sin aditivos artificiales.</p>
-                        <a href="#productos" class="btn">Ver productos</a>
+                        <a href="tomates.html" class="btn">Ver productos</a>
                     </div>
                 </div>
             </div>
@@ -282,7 +283,7 @@
                         <span class="slide-tag">Azúcar</span>
                         <h2>Azúcar</h2>
                         <p>Azúcar común tipo A para uso doméstico e industrial.</p>
-                        <a href="#productos" class="btn">Ver productos</a>
+                        <a href="azucar.html" class="btn">Ver productos</a>
                     </div>
                 </div>
             </div>
@@ -332,7 +333,7 @@
             </div>
             <div class="productos-grid">
                 <div class="producto-card">
-                    <div class="producto-img"><img src="dulce_de_vatata_a_la_vainilla.jpeg" alt="Dulce de Batata a la Vainilla"></div>
+                    <div class="producto-img"><img src="Batata_vainilla_5_kg.png" alt="Dulce de Batata a la Vainilla"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Batata a la Vainilla</h3>
@@ -340,7 +341,7 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img"><img src="dulce_de_batata_con_chocolate.jpeg" alt="Dulce de Batata con Chocolate"></div>
+                    <div class="producto-img"><img src="Batata_con_choc_5_kg.png" alt="Dulce de Batata con Chocolate"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Batata con Chocolate</h3>
@@ -348,7 +349,7 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img"><img src="dulce_de_membrillo.jpeg" alt="Dulce de Membrillo"></div>
+                    <div class="producto-img"><img src="Membrillo_5_kg.png" alt="Dulce de Membrillo"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Dulces</div>
                         <h3>Dulce de Membrillo</h3>
@@ -356,7 +357,7 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img"><img src="lata_de_tomate.jpeg" alt="Tomates Triturados Lata"></div>
+                    <div class="producto-img"><img src="Tomate_8_kg.png" alt="Tomates Triturados Lata"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Tomates</div>
                         <h3>Tomates Triturados — Lata</h3>
@@ -372,7 +373,7 @@
                     </div>
                 </div>
                 <div class="producto-card">
-                    <div class="producto-img"><img src="azucar.jpeg" alt="Azúcar"></div>
+                    <div class="producto-img"><img src="Azu_car.png" alt="Azúcar"></div>
                     <div class="producto-info">
                         <div class="producto-categoria">Azúcar</div>
                         <h3>Azúcar Común Tipo A</h3>
